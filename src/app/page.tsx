@@ -9,9 +9,9 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <form action={handleURLInput} className="flex">
+      <form action={handleURLInput} className="flex gap-2">
         <Input placeholder="Enter a URL" name="url" />
-        <Button type="submit" className="bg-">
+        <Button type="submit" className="bg-gray-950 ">
           Scrape
         </Button>
       </form>

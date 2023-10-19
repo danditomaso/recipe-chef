@@ -1,0 +1,7 @@
+compatibility_date = "2022-11-07"
+node_compat = true
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "naked-recipes"
+database_id = "Ifd121354-866d-4bdd-9e04-c51fd15fb2f5"

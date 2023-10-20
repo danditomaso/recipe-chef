@@ -6,19 +6,18 @@
     "dev": "next dev",
     "dev:wrangler": "wrangler dev --env development --local --persist",
     "build": "next build",
-    "build:cloudflare": "bunx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
-    "wrangler": "wrangler",
     "generate": "drizzle-kit generate:sqlite --schema=src/db/schema.ts",
     "up": "drizzle-kit up:sqlite --schema=src/db/schema.ts"
   },
   "dependencies": {
+    "@planetscale/database": "^1.11.0",
     "@prisma/client": "^5.4.2",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "drizzle-orm": "^0.28.6",
+    "dotenv": "^16.3.1",
     "lucide-react": "^0.288.0",
     "neverthrow": "^6.0.0",
     "next": "13.5.5",
@@ -29,20 +28,16 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.7.1",
-    "@cloudflare/workers-types": "^4.20231016.0",
     "@types/jsdom": "^21.1.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
-    "drizzle-kit": "^0.19.13",
     "eslint": "^8",
     "eslint-config-next": "13.5.5",
     "postcss": "^8",
     "prisma": "^5.4.2",
     "tailwindcss": "^3",
-    "typescript": "^5",
-    "wrangler": "^3.13.2"
+    "typescript": "^5"
   }
 }

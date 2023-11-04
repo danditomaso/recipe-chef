@@ -1,17 +1,15 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
+import { connect } from "@planetscale/database";
 
-const prisma = new PrismaClient();
+const config = {
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+};
 
-async function main() {
-  // ... you will write your Prisma Client queries here
-}
+export const db = connect(config);
+// const results = await conn.execute("select 1 from dual where 1=?", [1]);
+// return results;
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+export const prisma = new PrismaClient();

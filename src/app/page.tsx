@@ -1,11 +1,15 @@
+// import { sql } from "@vercel/postgres";
+import { kv } from "@vercel/kv";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Scraper } from "@/lib/Scraper";
-import { handleURLInput } from "./receipe/actions";
+import { sql } from "drizzle-orm";
+
+import { handleURLInput } from "./actions";
 
 export default async function Home() {
-  // const parser = new Scraper();
-  // console.log(await parser.getRecipe(""));
+  // const { rows } = await sql`SELECT * from CARTS where user_id=${"dand"}`;
+  // console.log(rows);
+  // await kv.publish("redis", "hello world");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

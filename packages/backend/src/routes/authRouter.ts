@@ -39,11 +39,12 @@ app.get("/callback/google", async (c: Context) => {
       access_token: authToken.value.access_token,
     }
 
+    console.debug("JWT Token payload", tokenPayload);
     const { email, family_name, given_name, picture, id } = userInfo.value
     await upsertUser({ email, picture, lastName: family_name, firstName: given_name, providerId: id })
 
     // Set the expiration to match the google oAuth token
-    const cookie = await generateJWT(tokenPayload, envVars.JWT_SIGNING_SECRET, authToken?.expires_in);
+    const cookie = await generateJWT(tokenPayload, envVars.JWT_SIGNING_SECRET, authToken?.value.expires_in);
     setCookie(c, "cf_auth", cookie, { httpOnly: true, path: "/", secure: true, sameSite: "Lax" })
 
     return c.newResponse(null, {

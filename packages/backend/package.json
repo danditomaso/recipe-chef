@@ -1,0 +1,53 @@
+{
+	"name": "recipe-chef",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "run-p dev:*",
+		"dev:server": "NODE_ENV=development dotenv -e .env.local -- bun run --watch ./app.ts",
+		"dev:worker:scrape": "dotenv -e .env.local -- bun run --watch src/lib/workers/scrape.worker.ts",
+		"debug:debug": "NODE_DEBUG=API bun dev",
+		"debug:mocks": "ENABLE_MOCKS=true bun dev",
+		"db:generate": "drizzle-kit generate --config src/db/drizzle.config.ts",
+		"db:migrate": "dotenv -e .env.local -- drizzle-kit migrate --config src/db/drizzle.config.ts",
+		"db:push": "dotenv -e .env.local -- drizzle-kit push --config src/db/drizzle.config.ts",
+		"test": "vitest --config ./vitest.config.ts"
+	},
+	"dependencies": {
+		"@hono/zod-validator": "^0.2.2",
+		"date-fns": "^3.6.0",
+		"dotenv": "^16.4.5",
+		"dotenv-cli": "^7.4.2",
+		"drizzle-orm": "^0.31.2",
+		"drizzle-zod": "^0.5.1",
+		"google-auth-library": "^9.11.0",
+		"hono": "^4.4.8",
+		"hono-sessions": "^0.5.8",
+		"jsdom": "^24.1.0",
+		"jsonld": "^8.3.2",
+		"nanoid": "^5.0.7",
+		"npm-run-all": "^4.1.5",
+		"pg": "^8.12.0",
+		"pratica": "^2.3.0",
+		"react-dom": "^18.3.1",
+		"schema-dts": "^1.1.2",
+		"zod": "^3.23.8",
+		"zod-fetch": "^0.1.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.2",
+		"@types/bun": "^1.1.5",
+		"@types/jsdom": "^21.1.7",
+		"@types/node": "^20.14.9",
+		"@types/pg": "^8.11.6",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@types/debug": "^4.1.12",
+		"@types/dotenv": "^8.2.0",
+		"@types/jsonld": "^1.5.14",
+		"drizzle-kit": "^0.22.7",
+		"msw": "^2.3.1",
+		"typescript": "^5.5.2",
+		"vitest": "^1.6.0"
+	}
+}

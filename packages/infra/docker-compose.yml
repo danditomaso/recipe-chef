@@ -1,0 +1,27 @@
+services:
+  # db:
+  #   env_file: "../packages/backend/.env"
+  #   image: postgres:latest
+  #   restart: always
+  #   shm_size: 128mb
+  #   volumes: 
+  #     - db:/var/lib/postgresql/data
+  #   ports:
+  #     - "5416:5432"
+  #   environment:
+  #     POSTGRES_DB: recipe-chef
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres1
+  #     POSTGRES_HOST_AUTH_METHOD: trust
+  cache:
+    env_file: "../backend/.env"
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass "${REDIS_HOST_PASSWORD}"
+    volumes: 
+        - redis:/data
+volumes:
+ redis: 
+    driver: local

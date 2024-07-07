@@ -1,12 +1,14 @@
-import type { PartialRecipe } from "@/data-access/recipes/types";
 import type { Recipe } from "schema-dts";
 
 import { JSDOM } from "jsdom";
 import { frame } from "jsonld";
-import { randomUserAgent } from "@/utils/userAgent";
+import { randomUserAgent } from "@/lib/userAgent";
+import type { Result } from "@/types";
 
 class RecipeScraper {
-  private recipeData: PartialRecipe = {};
+  private recipeData: Recipe = {
+    "@type": "Recipe",
+  };
   private url: string;
 
   constructor(url: string) {
@@ -38,29 +40,23 @@ class RecipeScraper {
           "@type": "Recipe",
           "@explict": true,
           identifer: {},
-          // 'name': {},
-          // 'description': {},
-          // 'image': {},
-        })) as PartialRecipe;
-        console.log(this.recipeData);
+        })) as Recipe;
 
       }
     } catch (error) {
-      if (error instanceof Error) {
+      if (typeof error === "object" && error && "message" in error) {
         console.error("Error scraping recipe:", error.message);
-        throw new Error(error.message);
+        throw { ok: false, error: error.message };
       }
     }
   }
 
-  public async scrapeRecipe(): Promise<void> {
-    this.scrapeRecipeData()
+  // public method to return recipe data 
+  public async getRecipeData(): Promise<Result<Recipe>> {
+    await this.scrapeRecipeData()
+    return { ok: true, value: this.recipeData };
   }
 
-  // public method to return recipe data 
-  public getRecipeData(): Partial<Recipe> {
-    return this.recipeData;
-  }
 }
 
 export { RecipeScraper };

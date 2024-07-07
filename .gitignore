@@ -39,7 +39,7 @@ next-env.d.ts
 
 #db migrations
 *.sql
-*meta/*
+*migrations/*
 
 /packages/backend/node_modules
 /packages/frontend/node_modules

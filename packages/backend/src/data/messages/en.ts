@@ -1,5 +1,8 @@
 export const messages = {
   error: {
+    UNDEFINED_SCRAPE_ERROR: "Error scraping recipe",
+    UNSUPPORTED_DOMAIN: "Unsupported domain",
+    INVALID_URL: "Invalid URL",
     INTERNAL_SERVER_ERROR: "Internal server error",
     SOMETHING_WENT_WRONG: "Something went wrong",
     NO_FILE: "No file provided",
@@ -15,7 +18,6 @@ export const messages = {
     FILE_UPLOAD_FAILED: "File upload failed",
   },
   success: {
-    FILES_UPLOADED: "Files uploaded successfully",
-    FILE_DELETED: "File deleted successfully",
+    RECIPE_SCRAPPED_SUCCESSFULLY: "Recipe scrapped successfully",
   },
 };

@@ -28,37 +28,37 @@ export class KV implements KVService {
 
   private handleError<T>(error: unknown, errorMessage: string): Result<T> {
     console.error(errorMessage, error);
-    return { success: false, error: new Error(errorMessage) };
+    return { ok: false, error: new Error(errorMessage) };
   }
 
-  /* 
-  * Set multiple values in Redis
-  * @param keys - key to set in Redis
-  * @param value - value to set in Redis
-  * @param opts - options for setting value in Redis
-  * @param opts.expireIn - time in seconds after which the key will expire
-  * @returns Result<{ key: string | string[] }>
-  * @throws Error
-  * */
-  public async setMultiple(keys: { key: string | string[], value: string | Record<string, unknown>, opts?: { expireIn?: number } }[]): Promise<Result<{ key: string | string[] }[]>> {
-    try {
-      const results = await Promise.all(
-        keys?.map(async ({ key, value, opts }) => {
-          const setResult = await this.set(key, value, opts);
+  // /* 
+  // * Set multiple values in Redis
+  // * @param keys - key to set in Redis
+  // * @param value - value to set in Redis
+  // * @param opts - options for setting value in Redis
+  // * @param opts.expireIn - time in seconds after which the key will expire
+  // * @returns Result<{ key: string | string[] }>
+  // * @throws Error
+  // * */
+  // public async setMultiple(keys: { key: string | string[], value: string | Record<string, unknown>, opts?: { expireIn?: number } }[]): Promise<Result<{ key: string | string[] }[]>> {
+  //   try {
+  //     const results = await Promise.all(
+  //       keys?.map(async ({ key, value, opts }) => {
+  //         const setResult = await this.set(key, value, opts);
 
-          if (setResult.success === false) {
-            return { success: false, error: new Error("Failed to set value in Redis") };
-          }
+  //         if (setResult.ok === false) {
+  //           return { ok: false, error: new Error("Failed to set value in Redis") };
+  //         }
 
-          return { success: true, data: { key: setResult.data?.key } };
-        })
-      );
+  //         return { ok: true, value: { key: setResult.value?.key } };
+  //       })
+  //     );
 
-      return { success: true, data: results };
-    } catch (error) {
-      return this.handleError<{ key: string | string[] }[]>(error, "Error setting value in Redis");
-    }
-  }
+  //     return { ok: true, value: };
+  //   } catch (error) {
+  //     return this.handleError<{ key: string | string[] }[]>(error, "Error setting value in Redis");
+  //   }
+  // }
 
 
   /* 
@@ -85,10 +85,10 @@ export class KV implements KVService {
       }
 
       if (setResult !== "OK") {
-        return { success: false, error: new Error("Failed to set value in Redis") };
+        return { ok: false, error: new Error("Failed to set value in Redis") };
       }
 
-      return { success: true, data: { key: keyPrefix } };
+      return { ok: true, value: { key: keyPrefix } };
     } catch (error) {
       return this.handleError<{ key: string | string[] }>(error, "Error setting value in Redis");
     }
@@ -99,11 +99,11 @@ export class KV implements KVService {
       const keyPrefix = key.join(":");
       const result = await this.connection.get(keyPrefix);
 
-      if (!result) return { success: true, data: { key: keyPrefix, value: null } };
+      if (!result) return { ok: true, value: { key: keyPrefix, value: null } };
 
       const value = result.startsWith("{") && result.endsWith("}") ? JSON.parse(result) as T : result as unknown as T;
 
-      return { success: true, data: { key: keyPrefix, value } };
+      return { ok: true, value: { key: keyPrefix, value } };
     } catch (error) {
       return this.handleError<GetSetKeyValue<T>>(error, "Error getting value from Redis");
     }
@@ -113,7 +113,7 @@ export class KV implements KVService {
     try {
       const keyPrefix = key.join(":");
       const result = await this.connection.del(keyPrefix);
-      return { success: true, data: result };
+      return { ok: true, value: result };
     } catch (error) {
       return this.handleError<number>(error, "Error deleting value from Redis");
     }
@@ -125,7 +125,7 @@ export class KV implements KVService {
     try {
       const keyPrefix = prefix.join(":");
       const keys = await this.connection.keys(`${keyPrefix}:*`);
-      return { success: true, data: keys };
+      return { ok: true, value: keys };
     } catch (error) {
       return this.handleError<string[]>(error, "Error listing keys from Redis");
     }

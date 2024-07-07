@@ -3,7 +3,7 @@ function Page() {
   return (
     <div className="flex flex-col gap-2 min-h-screen bg-gray-100 p-10">
 
-      <a href="/api/auth/google">
+      <a href="/api/login/google">
         <button
           type="submit"
           className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">

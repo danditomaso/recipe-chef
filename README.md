@@ -10,6 +10,6 @@ Say goodbye to cluttered recipe websites and hello to streamlined, efficient coo
 - **Enhanced Searchability:** Benefit from a growing ecosystem of user-contributed recipes, ensuring you always find inspiration for your next meal.
 - **Recipe Source Attribution:** Always have access to the original unmodified source URL, so you can get more details about the recipe if you prefer. We are not the authors of the recipes and strive to attribute the original authors correctly to give them credit for their work.
 
-## 🔧 Coming Soon: A browser extension to make recipe extraction even more seamless!
+## 🔧 Coming Soon: The platform being launched along with a browser extension to make recipe extraction even more seamless!
 
 Join in transforming the way you find, save, and share recipes. Say goodbye to clutter and hello to effortless cooking with Recipe Chef! 🍽️✨
